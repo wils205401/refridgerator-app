@@ -1,3 +1,7 @@
+# venv
+venv/
+
+# npm
 node_modules/
 .expo/
 dist/
