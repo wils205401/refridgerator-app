@@ -20,10 +20,30 @@ Front-end: react-native
 
 Back-end: Python, Flask, MySQL/PostgreSQL (not sure if needed, possibly can do with just using spoonacular API from react-native)
 
-External: Spoonacular API
+External: Spoonacular API, OpenFoodFacts API
 
 ## Get Started
 Download the repo, extract the files from the zip folder, and save to the desired directory.
+
+It would be best to work in a virtual environment, this prevents conflicts from dependencies if you are working on other projects. To do this, use the virtualenv package in python.
+```
+pip install virtual env
+# to check installed
+python -m virtualenv -h
+```
+Next, navigate to the directory where the repo is cloned. This is the root directory, and is where we will create the virtual environment.
+```
+# create a virtual enviroment in desired folder
+python -m venv c:/path/to/desired/directory/venv
+```
+Finally, we want to install all the dependencies. In the root directory, there is a file called requirements.txt, which contains the packages being used in the project along with their versions.
+```
+pip install -r requirements.txt
+```
+If you make changes that use a new library/package, update requirements.txt.
+```
+pip freeze > requirements.txt
+```
 
 Make sure you have node.js, npm, and react-native installed. For node.js and npm, I recommend installing them using a Node Version Manager (nvm). For more, see here - https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
 
