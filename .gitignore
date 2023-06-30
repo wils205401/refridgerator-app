@@ -1,6 +1,9 @@
 # venv
 venv/
 
+# cache stuff
+backend/__pycache__
+
 # npm
 node_modules/
 .expo/

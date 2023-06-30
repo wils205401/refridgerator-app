@@ -1,3 +1,4 @@
+import React from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   Button,
@@ -11,35 +12,75 @@ import {
   TouchableHighlight,
   Platform,
 } from "react-native";
+import HomeScreen from "./components/HomeScreen";
+import CreateScreen from "./components/CreateScreen";
+import RecipeScreen from "./components/RecipeScreen";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-export default function App() {
-  console.log(Dimensions.get("screen"));
+const bottomTab = createBottomTabNavigator();
+
+function MyTabs() {
   return (
-    <SafeAreaView style={styles.container}>
-      <View
-        style={{
-          backgroundColor: "dodgerblue",
-          width: "100%",
-          height: "30%",
+    <bottomTab.Navigator
+      initialRouteName="HomeScreen"
+      screenOptions={{
+        tabBarActiveTintColor: "#e91e63",
+      }}
+    >
+      <bottomTab.Screen
+        name="CreateScreen"
+        component={CreateScreen}
+        options={{
+          tabBarLabel: "Create",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="plus" color={color} size={size} />
+          ),
         }}
-      ></View>
-      <Text>Welcome to Leo</Text>
-      <Button
-        title="Click Me"
-        onPress={() =>
-          Alert.prompt("Hello", "How are you?", (text) => console.log(text))
-        }
       />
-      <StatusBar style="auto" />
-    </SafeAreaView>
+      <bottomTab.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{
+          tabBarLabel: "Home",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+        }}
+      />
+      <bottomTab.Screen
+        name="RecipeScreen"
+        component={RecipeScreen}
+        options={{
+          tabBarLabel: "Recipes",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="food" color={color} size={size} />
+          ),
+        }}
+      />
+    </bottomTab.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+const Stack = createNativeStackNavigator();
+
+const App = () => {
+  return (
+    <NavigationContainer>
+      {/* <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          // options={{ title: "Loading" }}
+        /> */}
+      <bottomTab.Navigator screenOptions={{ headerShown: false }}>
+        <bottomTab.Screen name="bottom tab" component={MyTabs} />
+      </bottomTab.Navigator>
+      {/* </Stack.Navigator> */}
+    </NavigationContainer>
+  );
+};
+
+export default App;
